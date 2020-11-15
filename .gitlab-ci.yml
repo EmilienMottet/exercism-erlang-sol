@@ -1,5 +1,22 @@
 generate_gitlab-ci:
   stage: build
+  image:
+    name: bitnami/jsonnet:latest
+    entrypoint: [""]
   script:
-    - echo "Hello world"
+    - echo hello world
+    - which jsonnet
+    - jsonnet ".erlang-gitlab-ci-template.jsonnet" > generated-config.yml
+  artifacts:
+    paths:
+      - generated-config.yml
 
+trigger-tests:
+  stage: test
+  needs:
+    - generate_gitlab-ci
+  trigger:
+    include:
+      - artifact: generated-config.yml
+        job: generate_gitlab-ci
+    strategy: depend
