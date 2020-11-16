@@ -1,24 +1,21 @@
-generate_gitlab-cis:
+generate_trigger_gitlab-ci:
   stage: build
   image:
     name: bitnami/jsonnet:latest
     entrypoint: [""]
   script:
-    - jsonnet -m . --ext-str exercism_projects="$(ls -d */)" --ext-str lang="erlang" ".erlang-gitlab-ci-template.jsonnet"
+    - jsonnet -m . --ext-str exercism_projects="$(ls -d */)" --ext-str lang="erlang" ".generate-config.jsonnet"
   artifacts:
     paths:
       - .generated-config.yml
-      - .erlang-*-gitlab-ci.yml
 
 trigger-tests:
   stage: test
   needs:
-    - generate_gitlab-cis
+    - generate_trigger_gitlab-ci
   trigger:
     include:
-      - artifact:
-          paths:
-            - .generated-config.yml
-            - .erlang-*-gitlab-ci.yml
-        job: generate_gitlab-cis
+      - artifact: .generated-config.yml
+        job: generate_trigger_gitlab-ci
     strategy: depend
+    
