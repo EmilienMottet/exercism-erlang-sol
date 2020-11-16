@@ -1,7 +1,0 @@
-default:
-  image: erlang:latest
-
-test-erlang-accumulate-exercism:
-  script:
-    - cd accumulate
-    - rebar3 eunit
