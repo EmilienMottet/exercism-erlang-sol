@@ -13,8 +13,8 @@ generate_gitlab-ci:
 
 trigger-tests:
   stage: test
-  # needs:
-  #   - generate_gitlab-ci
+  needs:
+    - generate_gitlab-ci
   trigger:
     include:
       - artifact: generated-config.yml
