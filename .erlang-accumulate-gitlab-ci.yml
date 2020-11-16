@@ -2,8 +2,6 @@ default:
   image: erlang:latest
 
 test-erlang-accumulate-exercism:
-  # stage: test
   script:
-    - echo hello world
-    # - cd accumulate
-    # - rebar3 eunit
+    - cd accumulate
+    - rebar3 eunit
