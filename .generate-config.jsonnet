@@ -7,12 +7,12 @@ local JobHandler(name) = {
     trigger: {
       include: [
         {
-          artifact: '.erlang-'+name+'-gitlab-ci.yml',
+          artifact: '.' + lang + '-' + name + '-gitlab-ci.yml',
           job: 'generate_' + lang + '_gitlab_ci',
-        }
+        },
       ],
       strategy: 'depend',
-    }
+    },
   },
 };
 
@@ -24,11 +24,11 @@ local JobHandler(name) = {
       entrypoint: [''],
     },
     script: [
-      'jsonnet -m . --ext-str exercism_projects="$(ls -d */)" --ext-str lang="erlang" ".erlang-gitlab-ci.jsonnet"',
+      'jsonnet -m . --ext-str exercism_projects="$(ls -d */)" --ext-str lang="' + lang + '" ".' + lang + '-gitlab-ci.jsonnet"',
     ],
     artifacts: {
       paths: [
-        '.erlang-*-gitlab-ci.yml',
+        '.' + lang + '-*-gitlab-ci.yml',
       ],
     },
   } } + std.foldl(function(x, y) x + y, std.map(JobHandler, exercism_projects), {}),
