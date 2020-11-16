@@ -1,4 +1,4 @@
-local exercism_projects = std.split(std.extVar('exercism_projects'), '\n');
+local exercism_projects = std.map(function(x) std.strReplace(x,"/",""),std.split(std.extVar('exercism_projects'), '\n'));
 local lang = std.extVar('lang');
 
 local JobHandler(name) = {
@@ -9,7 +9,7 @@ local JobHandler(name) = {
 };
 
 local ErlangTestJob(name) = {
-   [ '.erlang-'+name+'gitlab-ci.yml'  ]: {
+   [ '.erlang-'+name+'-gitlab-ci.yml'  ]: {
     default: {
       image: 'erlang:latest',
     },
