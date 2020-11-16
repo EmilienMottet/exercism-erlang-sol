@@ -1,5 +1,5 @@
-# default:
-#   image: erlang:latest
+default:
+  image: erlang:latest
 
 test-erlang-accumulate-exercism:
   # stage: test
