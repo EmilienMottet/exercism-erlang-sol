@@ -19,11 +19,11 @@ is_prime(N, K) ->
 do_prime(N, N, Res) ->
     Res - 1;
 do_prime(N, Ct, It) ->
-    IsPrime = is_prime(It),
-    if IsPrime == true ->
-           do_prime(N, Ct + 1, It + 1);
-       true ->
-           do_prime(N, Ct, It + 1)
+    case is_prime(It) of
+        true ->
+            do_prime(N, Ct + 1, It + 1);
+        false ->
+            do_prime(N, Ct, It + 1)
     end.
 
 prime(N) when N > 0 ->
