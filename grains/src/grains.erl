@@ -9,4 +9,4 @@ square(_) ->
 
 total() ->
     lists:sum(
-        lists:map(fun(Index) -> square(Index) end, lists:seq(1, 64))).
+      lists:map(fun square/1, lists:seq(1, 64))).
