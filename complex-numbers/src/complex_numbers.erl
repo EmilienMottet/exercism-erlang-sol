@@ -6,8 +6,8 @@
 -export_type([complex/0, real/0, imaginary/0]).
 
 -opaque complex() :: {real(), imaginary()}.
--opaque real() :: integer().
--opaque imaginary() :: integer().
+-opaque real() :: number().
+-opaque imaginary() :: number().
 
 -spec abs(complex()) -> complex().
 abs({R, I}) ->
